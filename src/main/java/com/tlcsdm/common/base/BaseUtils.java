@@ -793,4 +793,24 @@ public class BaseUtils {
         return result;
     }
 
+    /**
+     * 深度克隆
+     */
+    public static void callbackNotFound(HttpServletResponse response, Exception e) {
+        e.printStackTrace();
+        response.setContentType("text/html;charset=utf-8");
+        @Cleanup PrintWriter out = null;
+        try {
+            out = response.getWriter();
+            out.print("<span style=\"display:block;text-align: center;margin:0 auto;min-width: 150px;\">" + e.getMessage() + "</span><br/>");
+            out.print("<br/><button autocomplete=\"off\" onclick=\"javascript:window.history.back(-1);return false;\" autofocus=\"true\"\n" +
+                    "            style=\"display:block;margin:0 auto;min-width: 150px;background-color:rgb(0, 138, 203);color: rgb(255, 255, 255);\">\n" +
+                    "        返回上一个页面\n" +
+                    "    </button>");
+            out.flush();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
 }
