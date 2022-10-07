@@ -5,6 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.tlcsdm</groupId>
     <artifactId>tlcsdm-common</artifactId>
+    <name>tlcsdm-common</name>
     <version>1.1</version>
     <description>常用工具类</description>
     <url>https://www.tlcsdm.com</url>
