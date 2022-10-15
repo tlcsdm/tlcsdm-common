@@ -1,8 +1,5 @@
 package com.tlcsdm.common.util;
 
-import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleObjectProperty;
-
 import java.text.MessageFormat;
 import java.util.Locale;
 import java.util.ResourceBundle;
@@ -16,15 +13,14 @@ public class I18nUtil {
     /**
      * the current selected Locale.
      */
-    private static final ObjectProperty<Locale> locale;
+    private static final Locale locale;
     /**
      * 资源包默认路径
      */
     public static String BASENAME = "i18n.messages";
 
     static {
-        locale = new SimpleObjectProperty<>(getDefaultLocale());
-        locale.addListener((observable, oldValue, newValue) -> Locale.setDefault(newValue));
+        locale = getDefaultLocale();
         if (System.getProperty("nlurl") != null) {
             BASENAME = System.getProperty("nlurl");
         }
@@ -32,8 +28,6 @@ public class I18nUtil {
 
     /**
      * get the default locale. This is the systems default if contained in the supported locales, english otherwise.
-     *
-     * @return
      */
     public static Locale getDefaultLocale() {
         String lang = System.getProperty("nl");
@@ -53,16 +47,11 @@ public class I18nUtil {
     }
 
     public static Locale getLocale() {
-        return locale.get();
+        return locale;
     }
 
     public static void setLocale(Locale locale) {
-        localeProperty().set(locale);
-        Locale.setDefault(locale);
-    }
-
-    public static ObjectProperty<Locale> localeProperty() {
-        return locale;
+        locale = locale;
     }
 
     /**
