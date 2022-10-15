@@ -1,10 +1,11 @@
 package com.tlcsdm.common.util;
 
-import org.apache.poi.POIXMLDocumentPart;
+import com.tlcsdm.common.base.BaseUtils;
 import org.apache.poi.hssf.usermodel.*;
 import org.apache.poi.hssf.util.HSSFColor;
 import org.apache.poi.hwpf.HWPFDocument;
 import org.apache.poi.hwpf.converter.WordToHtmlConverter;
+import org.apache.poi.ooxml.POIXMLDocumentPart;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.xssf.usermodel.*;
@@ -30,10 +31,12 @@ import java.awt.Font;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.*;
-import java.text.DecimalFormat;
-import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
-import java.util.*;
+import java.util.Map;
+
+import static org.apache.poi.ss.usermodel.IndexedColors.AUTOMATIC;
 
 /**
  * @author: TangLiang
@@ -78,7 +81,7 @@ public class PoiUtil {
         out.close();
         inputStream.close();
 
-        return new String(out.toByteArray());
+        return out.toString();
     }
 
     /**
@@ -172,7 +175,7 @@ public class PoiUtil {
 
                     String pictureKey = rowNum + "," + colNum;
                     String pictureHtml = "";
-                    Boolean hasPicture = false;// 判断该行是否存在图片
+                    boolean hasPicture = false;// 判断该行是否存在图片
                     if (sheetPictureMap.containsKey(pictureKey)) {
                         List<Picture> pictureList = sheetPictureMap.get(pictureKey);
                         for (Picture picture : pictureList) {
@@ -181,15 +184,15 @@ public class PoiUtil {
                         hasPicture = true;
                     }
 
-                    String stringValue = getCellValue(cell);
+                    String stringValue = BaseUtils.getCellValue(cell);
                     if (map[0].containsKey(rowNum + "," + colNum)) {
                         String pointString = map[0].get(rowNum + "," + colNum);
                         map[0].remove(rowNum + "," + colNum);
-                        int bottomeRow = Integer.valueOf(pointString.split(",")[0]);
-                        int bottomeCol = Integer.valueOf(pointString.split(",")[1]);
+                        int bottomeRow = Integer.parseInt(pointString.split(",")[0]);
+                        int bottomeCol = Integer.parseInt(pointString.split(",")[1]);
                         int rowSpan = bottomeRow - rowNum + 1;
                         int colSpan = bottomeCol - colNum + 1;
-                        sb.append("<td rowspan= '" + rowSpan + "' colspan= '" + colSpan + "' ");
+                        sb.append("<td rowspan= '").append(rowSpan).append("' colspan= '").append(colSpan).append("' ");
                     } else if (map[1].containsKey(rowNum + "," + colNum)) {
                         map[1].remove(rowNum + "," + colNum);
                         continue;
@@ -224,7 +227,7 @@ public class PoiUtil {
         return sb.toString();
     }
 
-    @SuppressWarnings({"rawtypes", "unchecked"})
+    @SuppressWarnings({"unchecked"})
     private static Map<String, String>[] getRowSpanColSpanMap(Sheet sheet) {
         Map<String, String> map0 = new HashMap<String, String>();
         Map<String, String> map1 = new HashMap<String, String>();
@@ -248,64 +251,7 @@ public class PoiUtil {
             }
             map1.remove(topRow + "," + topCol);
         }
-        Map[] map = {map0, map1};
-        return map;
-    }
-
-    /**
-     * 获取表格单元格Cell内容
-     *
-     * @param cell
-     * @return
-     */
-    public static String getCellValue(Cell cell) {
-        String result = new String();
-        if (cell == null) {
-            return "";
-        }
-        switch (cell.getCellType()) {
-            case Cell.CELL_TYPE_NUMERIC:// 数字类型
-                if (HSSFDateUtil.isCellDateFormatted(cell)) {// 处理日期格式、时间格式
-                    SimpleDateFormat sdf = null;
-                    if (cell.getCellStyle().getDataFormat() == HSSFDataFormat.getBuiltinFormat("h:mm")) {
-                        sdf = new SimpleDateFormat("HH:mm");
-                    } else {// 日期
-                        sdf = new SimpleDateFormat("yyyy-MM-dd");
-                    }
-                    Date date = cell.getDateCellValue();
-                    result = sdf.format(date);
-                } else if (cell.getCellStyle().getDataFormat() == 58) {
-                    // 处理自定义日期格式：m月d日(通过判断单元格的格式id解决，id的值是58)
-                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-                    double value = cell.getNumericCellValue();
-                    Date date = DateUtil.getJavaDate(value);
-                    result = sdf.format(date);
-                } else {
-                    double value = cell.getNumericCellValue();
-                    CellStyle style = cell.getCellStyle();
-                    DecimalFormat format = new DecimalFormat();
-                    String temp = style.getDataFormatString();
-                    // 单元格设置成常规
-                    if (temp.equals("General")) {
-                        format.applyPattern("#.####");
-                    }
-                    result = format.format(value);
-                }
-                break;
-            case Cell.CELL_TYPE_STRING:// String类型
-                result = cell.getRichStringCellValue().toString();
-                break;
-            case Cell.CELL_TYPE_BLANK:
-                result = "";
-                break;
-            case Cell.CELL_TYPE_FORMULA:
-                result = String.valueOf(cell.getNumericCellValue());
-                break;
-            default:
-                result = "";
-                break;
-        }
-        return result;
+        return new Map[]{map0, map1};
     }
 
     /**
@@ -327,16 +273,16 @@ public class PoiUtil {
 
         CellStyle cellStyle = cell.getCellStyle();
         if (cellStyle != null) {
-            short alignment = cellStyle.getAlignment();
+            short alignment = cellStyle.getAlignment().getCode();
             sb.append("align='" + convertAlignToHtml(alignment) + "' ");// 单元格内容的水平对齐方式
-            short verticalAlignment = cellStyle.getVerticalAlignment();
+            short verticalAlignment = cellStyle.getVerticalAlignment().getCode();
             sb.append("valign='" + convertVerticalAlignToHtml(verticalAlignment) + "' ");// 单元格中内容的垂直排列方式
 
             if (wb instanceof XSSFWorkbook) {
                 XSSFFont xf = ((XSSFCellStyle) cellStyle).getFont();
                 short boldWeight = xf.getBoldweight();
                 sb.append("style='");
-                sb.append("font-weight:" + boldWeight + ";"); // 字体加粗
+                sb.append("font-weight:").append(boldWeight).append(";"); // 字体加粗
                 sb.append("font-size: " + xf.getFontHeight() / 1.5 + "%;"); // 字体大小
                 sb.append("width:" + columnWidth + "px;");
                 sb.append("height:" + columnHeight + "px;");
@@ -350,14 +296,14 @@ public class PoiUtil {
                 }
 
                 XSSFColor bgColor = (XSSFColor) cellStyle.getFillForegroundColorColor();
-                if (bgColor != null && !"".equals(bgColor)) {
+                if (bgColor != null) {
                     sb.append("background-color:#" + bgColor.getARGBHex().substring(2) + ";"); // 背景颜色
                 }
                 if (!rowInvisible) {
-                    sb.append(getBorderStyle(0, cellStyle.getBorderTop(), ((XSSFCellStyle) cellStyle).getTopBorderXSSFColor()));
-                    sb.append(getBorderStyle(1, cellStyle.getBorderRight(), ((XSSFCellStyle) cellStyle).getRightBorderXSSFColor()));
-                    sb.append(getBorderStyle(2, cellStyle.getBorderBottom(), ((XSSFCellStyle) cellStyle).getBottomBorderXSSFColor()));
-                    sb.append(getBorderStyle(3, cellStyle.getBorderLeft(), ((XSSFCellStyle) cellStyle).getLeftBorderXSSFColor()));
+                    sb.append(getBorderStyle(0, cellStyle.getBorderTop().getCode(), ((XSSFCellStyle) cellStyle).getTopBorderXSSFColor()));
+                    sb.append(getBorderStyle(1, cellStyle.getBorderRight().getCode(), ((XSSFCellStyle) cellStyle).getRightBorderXSSFColor()));
+                    sb.append(getBorderStyle(2, cellStyle.getBorderBottom().getCode(), ((XSSFCellStyle) cellStyle).getBottomBorderXSSFColor()));
+                    sb.append(getBorderStyle(3, cellStyle.getBorderLeft().getCode(), ((XSSFCellStyle) cellStyle).getLeftBorderXSSFColor()));
                 }
             } else if (wb instanceof HSSFWorkbook) {
                 HSSFFont hf = ((HSSFCellStyle) cellStyle).getFont(wb);
@@ -366,7 +312,7 @@ public class PoiUtil {
                 sb.append("style='");
                 HSSFPalette palette = ((HSSFWorkbook) wb).getCustomPalette(); // 类HSSFPalette用于求的颜色的国际标准形式
                 HSSFColor hc = palette.getColor(fontColor);
-                sb.append("font-weight:" + boldWeight + ";"); // 字体加粗
+                sb.append("font-weight:").append(boldWeight).append(";"); // 字体加粗
                 sb.append("font-size: " + hf.getFontHeight() / 1.5 + "%;"); // 字体大小
                 String fontColorStr = convertToStardColor(hc);
                 if (fontColorStr != null && !"".equals(fontColorStr.trim())) {
@@ -384,10 +330,10 @@ public class PoiUtil {
                     sb.append("background-color:" + bgColorStr + ";"); // 背景颜色
                 }
                 if (!rowInvisible) {
-                    sb.append(getBorderStyle(palette, 0, cellStyle.getBorderTop(), cellStyle.getTopBorderColor()));
-                    sb.append(getBorderStyle(palette, 1, cellStyle.getBorderRight(), cellStyle.getRightBorderColor()));
-                    sb.append(getBorderStyle(palette, 3, cellStyle.getBorderLeft(), cellStyle.getLeftBorderColor()));
-                    sb.append(getBorderStyle(palette, 2, cellStyle.getBorderBottom(), cellStyle.getBottomBorderColor()));
+                    sb.append(getBorderStyle(palette, 0, cellStyle.getBorderTop().getCode(), cellStyle.getTopBorderColor()));
+                    sb.append(getBorderStyle(palette, 1, cellStyle.getBorderRight().getCode(), cellStyle.getRightBorderColor()));
+                    sb.append(getBorderStyle(palette, 3, cellStyle.getBorderLeft().getCode(), cellStyle.getLeftBorderColor()));
+                    sb.append(getBorderStyle(palette, 2, cellStyle.getBorderBottom().getCode(), cellStyle.getBottomBorderColor()));
                 }
             }
 
@@ -397,20 +343,17 @@ public class PoiUtil {
 
     /**
      * 单元格内容的水平对齐方式
-     *
-     * @param alignment
-     * @return
      */
     private static String convertAlignToHtml(short alignment) {
         String align = "left";
-        switch (alignment) {
-            case CellStyle.ALIGN_LEFT:
+        switch (HorizontalAlignment.forInt(alignment)) {
+            case LEFT:
                 align = "left";
                 break;
-            case CellStyle.ALIGN_CENTER:
+            case CENTER:
                 align = "center";
                 break;
-            case CellStyle.ALIGN_RIGHT:
+            case RIGHT:
                 align = "right";
                 break;
             default:
@@ -427,14 +370,14 @@ public class PoiUtil {
      */
     private static String convertVerticalAlignToHtml(short verticalAlignment) {
         String valign = "middle";
-        switch (verticalAlignment) {
-            case CellStyle.VERTICAL_BOTTOM:
+        switch (VerticalAlignment.forInt(verticalAlignment)) {
+            case BOTTOM:
                 valign = "bottom";
                 break;
-            case CellStyle.VERTICAL_CENTER:
+            case CENTER:
                 valign = "center";
                 break;
-            case CellStyle.VERTICAL_TOP:
+            case TOP:
                 valign = "top";
                 break;
             default:
@@ -444,29 +387,22 @@ public class PoiUtil {
     }
 
     private static String convertToStardColor(HSSFColor hc) {
-        StringBuffer sb = new StringBuffer("");
+        StringBuffer sb = new StringBuffer();
         if (hc != null) {
-            if (HSSFColor.AUTOMATIC.index == hc.getIndex()) {
+            if (AUTOMATIC.index == hc.getIndex()) {
                 return null;
             }
             sb.append("#");
             for (int i = 0; i < hc.getTriplet().length; i++) {
-                sb.append(fillWithZero(Integer.toHexString(hc.getTriplet()[i])));
+                sb.append(BaseUtils.fillWithZero(Integer.toHexString(hc.getTriplet()[i])));
             }
         }
 
         return sb.toString();
     }
 
-    private static String fillWithZero(String str) {
-        if (str != null && str.length() < 2) {
-            return "0" + str;
-        }
-        return str;
-    }
-
-    private static String[] bordesr = {"border-top:", "border-right:", "border-bottom:", "border-left:"};
-    private static String[] borderStyles = {"solid ", "solid ", "solid ", "solid ", "solid ", "solid ", "solid ", "solid ", "solid ", "solid", "solid", "solid", "solid", "solid"};
+    private static final String[] bordesr = {"border-top:", "border-right:", "border-bottom:", "border-left:"};
+    private static final String[] borderStyles = {"solid ", "solid ", "solid ", "solid ", "solid ", "solid ", "solid ", "solid ", "solid ", "solid", "solid", "solid", "solid", "solid"};
 
     private static String getBorderStyle(HSSFPalette palette, int b, short s, short t) {
         if (s == 0) {
@@ -483,7 +419,7 @@ public class PoiUtil {
             return bordesr[b] + borderStyles[s] + "#d0d7e5 0px;";
         }
 
-        if (xc != null && !"".equals(xc)) {
+        if (xc != null) {
             String borderColorStr = xc.getARGBHex();// t.getARGBHex();
             borderColorStr = borderColorStr == null || borderColorStr.length() < 1 ? "#000000" : borderColorStr.substring(2);
             return bordesr[b] + borderStyles[s] + borderColorStr + " 1px;";
@@ -516,7 +452,7 @@ public class PoiUtil {
      * @return Map key:图片单元格索引（1,1）String，value:图片流Picture
      */
     private static Map<String, List<Picture>> getSheetPictureMap2007(XSSFSheet sheet) {
-        Map<String, List<Picture>> sheetPictureMap = new HashMap<String, List<Picture>>();
+        Map<String, List<Picture>> sheetPictureMap = new HashMap<>();
 
         for (POIXMLDocumentPart documentPart : sheet.getRelations()) {
             if (documentPart instanceof XSSFDrawing) {
@@ -527,11 +463,7 @@ public class PoiUtil {
                     XSSFClientAnchor anchor = picture.getPreferredSize();
                     CTMarker ctMarker = anchor.getFrom();
                     String pictureKey = ctMarker.getRow() + "," + ctMarker.getCol();
-                    List<Picture> pictureList = sheetPictureMap.get(pictureKey);
-                    if (pictureList == null) {
-                        pictureList = new ArrayList<>();
-                        sheetPictureMap.put(pictureKey, pictureList);
-                    }
+                    List<Picture> pictureList = sheetPictureMap.computeIfAbsent(pictureKey, k -> new ArrayList<>());
                     pictureList.add(picture);
                 }
             }
@@ -547,7 +479,7 @@ public class PoiUtil {
      * @return Map key:图片单元格索引（1,1）String，value:图片流Picture
      */
     private static Map<String, List<Picture>> getSheetPictrues2003(HSSFSheet sheet) {
-        Map<String, List<Picture>> sheetPictureMap = new HashMap<String, List<Picture>>();
+        Map<String, List<Picture>> sheetPictureMap = new HashMap<>();
 
         // 处理sheet中的图形
         HSSFPatriarch hssfPatriarch = sheet.getDrawingPatriarch();
@@ -561,12 +493,8 @@ public class PoiUtil {
                     // 图形定位
                     if (picture.getAnchor() instanceof HSSFClientAnchor) {
                         HSSFClientAnchor anchor = (HSSFClientAnchor) picture.getAnchor();
-                        String pictureKey = String.valueOf(anchor.getRow1()) + "," + String.valueOf(anchor.getCol1());
-                        List<Picture> pictureList = sheetPictureMap.get(pictureKey);
-                        if (pictureList == null) {
-                            pictureList = new ArrayList<>();
-                            sheetPictureMap.put(pictureKey, pictureList);
-                        }
+                        String pictureKey = anchor.getRow1() + "," + String.valueOf(anchor.getCol1());
+                        List<Picture> pictureList = sheetPictureMap.computeIfAbsent(pictureKey, k -> new ArrayList<>());
                         pictureList.add(picture);
                     }
                 }
@@ -624,9 +552,9 @@ public class PoiUtil {
         int textY;
         for (int i = 0; i < lineNum; i++) {
             textX = (width - fontMetrics.stringWidth(texts[i])) / 2 + x;// 横向居中
-            if (valign.equals("top")) {
+            if ("top".equals(valign)) {
                 textY = textHeight * i + y + fontMetrics.getAscent();// 纵向居中
-            } else if (valign.equals("bottom")) {
+            } else if ("bottom".equals(valign)) {
                 textY = (height - textHeight * lineNum) + textHeight * i + y + fontMetrics.getAscent();// 纵向居中
             } else {
                 textY = (height - textHeight * lineNum) / 2 + textHeight * i + y + fontMetrics.getAscent();// 纵向居中
@@ -685,9 +613,7 @@ public class PoiUtil {
         g2d.drawImage(imgSource, x, y, null);
         g2d.dispose();
 
-        BufferedImage imgGlow = generateBlur(imgMask, (size * 2), color, alpha); // ---- Blur here ---
-
-        return imgGlow;
+        return generateBlur(imgMask, (size * 2), color, alpha);
     }
 
     private static void applyQualityRenderingHints(Graphics2D g2d) {
@@ -721,38 +647,6 @@ public class PoiUtil {
         //imgBlur = filter.filter(imgBlur, null);
 
         return imgBlur;
-    }
-
-    //进度计算
-    public static int differentDays(Date date1, Date date2) {
-        Calendar cal1 = Calendar.getInstance();
-        cal1.setTime(date1);
-
-        Calendar cal2 = Calendar.getInstance();
-        cal2.setTime(date2);
-        int day1 = cal1.get(Calendar.DAY_OF_YEAR);
-        int day2 = cal2.get(Calendar.DAY_OF_YEAR);
-
-        int year1 = cal1.get(Calendar.YEAR);
-        int year2 = cal2.get(Calendar.YEAR);
-        if (year1 != year2)   //不同一年
-        {
-            int timeDistance = 0;
-            for (int i = year1; i < year2; i++) {
-                if (i % 4 == 0 && i % 100 != 0 || i % 400 == 0)    //闰年
-                {
-                    timeDistance += 366;
-                } else    //不是闰年
-                {
-                    timeDistance += 365;
-                }
-            }
-
-            return timeDistance + (day2 - day1);
-        } else    //同一年
-        {
-            return day2 - day1;
-        }
     }
 
 }

@@ -163,6 +163,12 @@
             <version>5.2.2</version>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+            <groupId>fr.opensagres.xdocreport</groupId>
+            <artifactId>xdocreport</artifactId>
+            <version>1.0.6</version>
+            <scope>provided</scope>
+        </dependency>
         <!--请求头user-Agent工具类-->
         <dependency>
             <groupId>eu.bitwalker</groupId>
