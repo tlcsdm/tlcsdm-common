@@ -280,7 +280,7 @@ public class PoiUtil {
 
             if (wb instanceof XSSFWorkbook) {
                 XSSFFont xf = ((XSSFCellStyle) cellStyle).getFont();
-                short boldWeight = xf.getBoldweight();
+                short boldWeight = getBoldweight(xf.getBold());
                 sb.append("style='");
                 sb.append("font-weight:").append(boldWeight).append(";"); // 字体加粗
                 sb.append("font-size: " + xf.getFontHeight() / 1.5 + "%;"); // 字体大小
@@ -307,7 +307,7 @@ public class PoiUtil {
                 }
             } else if (wb instanceof HSSFWorkbook) {
                 HSSFFont hf = ((HSSFCellStyle) cellStyle).getFont(wb);
-                short boldWeight = hf.getBoldweight();
+                short boldWeight = getBoldweight(hf.getBold());
                 short fontColor = hf.getColor();
                 sb.append("style='");
                 HSSFPalette palette = ((HSSFWorkbook) wb).getCustomPalette(); // 类HSSFPalette用于求的颜色的国际标准形式
@@ -647,6 +647,10 @@ public class PoiUtil {
         //imgBlur = filter.filter(imgBlur, null);
 
         return imgBlur;
+    }
+
+    private static short getBoldweight(boolean hasBold) {
+        return (short) (hasBold ? 700 : 400);
     }
 
 }
