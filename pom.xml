@@ -6,7 +6,7 @@
     <groupId>com.tlcsdm</groupId>
     <artifactId>tlcsdm-common</artifactId>
     <name>tlcsdm-common</name>
-    <version>1.2</version>
+    <version>1.3</version>
     <description>常用工具类</description>
     <url>https://www.tlcsdm.com</url>
     <licenses>
@@ -146,41 +146,21 @@
             <version>5.3.23</version>
             <scope>provided</scope>
         </dependency>
-        <!--poi-->
         <dependency>
-            <groupId>org.apache.poi</groupId>
-            <artifactId>poi</artifactId>
-            <version>3.13</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.poi</groupId>
-            <artifactId>poi-examples</artifactId>
-            <version>5.2.3</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.poi</groupId>
-            <artifactId>poi-excelant</artifactId>
-            <version>5.2.3</version>
-            <scope>provided</scope>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-all</artifactId>
+            <version>5.8.7</version>
         </dependency>
         <dependency>
             <groupId>org.apache.poi</groupId>
             <artifactId>poi-ooxml</artifactId>
-            <version>3.13</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.poi</groupId>
-            <artifactId>poi-ooxml-schemas</artifactId>
-            <version>4.1.2</version>
+            <version>5.2.2</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.poi</groupId>
             <artifactId>poi-scratchpad</artifactId>
-            <version>5.2.3</version>
+            <version>5.2.2</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
