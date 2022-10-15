@@ -157,6 +157,12 @@
             <version>5.2.2</version>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi-scratchpad</artifactId>
+            <version>5.2.2</version>
+            <scope>provided</scope>
+        </dependency>
         <!--请求头user-Agent工具类-->
         <dependency>
             <groupId>eu.bitwalker</groupId>
