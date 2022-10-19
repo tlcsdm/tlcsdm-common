@@ -1,6 +1,15 @@
 ## tlcsdm-common
 常用工具类封装
 
+## Maven
+```
+<dependency>
+    <groupId>com.tlcsdm</groupId>
+    <artifactId>tlcsdm-common</artifactId>
+    <version>1.3</version>
+</dependency>
+```
+
 ## 贡献者
 
 <table>
