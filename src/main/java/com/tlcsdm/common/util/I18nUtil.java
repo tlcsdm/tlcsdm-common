@@ -62,8 +62,8 @@ public class I18nUtil {
      * @param args optional arguments for the message
      * @return localized formatted string
      */
-    public static String get(final String key, final Object... args) {
-        ResourceBundle bundle = ResourceBundle.getBundle(BASENAME, getLocale());
+    public static String get(final String key, final Class<?> caller, final Object... args) {
+        ResourceBundle bundle = ResourceBundle.getBundle(BASENAME, getLocale(), caller.getClassLoader());
         return MessageFormat.format(bundle.getString(key), args);
     }
 }
