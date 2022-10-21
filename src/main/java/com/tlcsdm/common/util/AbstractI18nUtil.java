@@ -8,7 +8,7 @@ import java.util.ResourceBundle;
  * 可以通过 -Dnl=en/zh/ja 来选择语言，默认是系统语言
  * BASENAME 是资源包路径，可以通过-Dnlurl=xxx 指定
  */
-public class I18nUtil {
+public abstract class AbstractI18nUtil {
 
     /**
      * the current selected Locale.
@@ -62,8 +62,8 @@ public class I18nUtil {
      * @param args optional arguments for the message
      * @return localized formatted string
      */
-    public static String get(final String key, final Class<?> caller, final Object... args) {
-        ResourceBundle bundle = ResourceBundle.getBundle(BASENAME, getLocale(), caller.getClassLoader());
+    public static String get(final String key, final Object... args) {
+        ResourceBundle bundle = ResourceBundle.getBundle(BASENAME, getLocale());
         return MessageFormat.format(bundle.getString(key), args);
     }
 }
