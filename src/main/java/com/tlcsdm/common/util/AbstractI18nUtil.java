@@ -1,6 +1,9 @@
 package com.tlcsdm.common.util;
 
+import com.google.common.collect.Lists;
+
 import java.text.MessageFormat;
+import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -10,26 +13,21 @@ import java.util.ResourceBundle;
  */
 public abstract class AbstractI18nUtil {
 
-    /**
-     * the current selected Locale.
-     */
-    private static final Locale locale;
+    private Locale locale;
+
+    //模块名
+    protected String module = "";
     /**
      * 资源包默认路径
      */
-    public static String BASENAME = "i18n.messages";
+    private String baseName = module + (module.length() > 0 ? "." : module) + "i18n.messages";
 
-    static {
-        locale = getDefaultLocale();
-        if (System.getProperty("nlurl") != null) {
-            BASENAME = System.getProperty("nlurl");
-        }
-    }
+    private List<Locale> supportLocale = Lists.newArrayList(Locale.ENGLISH, Locale.SIMPLIFIED_CHINESE, Locale.JAPANESE);
 
     /**
      * get the default locale. This is the systems default if contained in the supported locales, english otherwise.
      */
-    public static Locale getDefaultLocale() {
+    public Locale getDefaultLocale() {
         String lang = System.getProperty("nl");
         if (lang != null) {
             switch (lang.toLowerCase()) {
@@ -43,15 +41,15 @@ public abstract class AbstractI18nUtil {
                     return Locale.ENGLISH;
             }
         }
+        Locale locale = Locale.getDefault();
+        if (supportLocale.contains(locale)) {
+            return locale;
+        }
         return Locale.ENGLISH;
     }
 
-    public static Locale getLocale() {
+    public Locale getLocale() {
         return locale;
-    }
-
-    public static void setLocale(Locale locale) {
-        locale = locale;
     }
 
     /**
@@ -62,8 +60,18 @@ public abstract class AbstractI18nUtil {
      * @param args optional arguments for the message
      * @return localized formatted string
      */
-    public static String get(final String key, final Object... args) {
-        ResourceBundle bundle = ResourceBundle.getBundle(BASENAME, getLocale());
+    public String get(final String key, final Object... args) {
+        if (locale == null) {
+            initLocale();
+        }
+        ResourceBundle bundle = ResourceBundle.getBundle(baseName, getLocale());
         return MessageFormat.format(bundle.getString(key), args);
+    }
+
+    private void initLocale() {
+        locale = getDefaultLocale();
+        if (System.getProperty("nlurl") != null) {
+            baseName = System.getProperty("nlurl");
+        }
     }
 }
