@@ -12,14 +12,7 @@ import java.lang.annotation.*;
 @Target({ElementType.PARAMETER, ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
+@Log
 public @interface ApiLog {
-    /**
-     * 模块
-     */
-    String title() default "";
 
-    /**
-     * 操作类型
-     */
-    String operateType() default "";
 }
