@@ -1,0 +1,12 @@
+enhancement:
+  - src/**
+
+workflow:
+  - .github/**
+
+documentation:
+  - CHANGELOG.md
+  - README.md
+
+dependencies:
+  - pom.xml
