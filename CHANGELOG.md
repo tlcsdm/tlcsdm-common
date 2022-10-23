@@ -1,5 +1,27 @@
 # CHANGELOG
 
+## [v1.3.3](https://github.com/unknowIfGuestInDream/tlcsdm-common/releases/tag/v1.3.3) - 2022-10-23 11:53:14
+
+1. 国际化工具错误修复
+2. 文档完善
+
+### Feature
+
+- general:
+  - 完善工作流 ([5171510](https://github.com/unknowIfGuestInDream/tlcsdm-common/commit/5171510aca54adaeec31af2b065a4a03ea2cdc57)) ([#49](https://github.com/unknowIfGuestInDream/tlcsdm-common/pull/49))
+  - 1.3.3 (#48) ([6164aeb](https://github.com/unknowIfGuestInDream/tlcsdm-common/commit/6164aeb27d061294c83c04c0ffb1b9f20f1e77d0)) ([#48](https://github.com/unknowIfGuestInDream/tlcsdm-common/pull/48))
+  - 新增label工作流 (#47) ([e7d075f](https://github.com/unknowIfGuestInDream/tlcsdm-common/commit/e7d075f0f7a3a85c26430636be72be9894228894)) ([#47](https://github.com/unknowIfGuestInDream/tlcsdm-common/pull/47))
+
+## [v1.3.2](https://github.com/unknowIfGuestInDream/tlcsdm-common/releases/tag/v1.3.2) - 2022-10-21 14:01:23
+
+1. 修复国际化工具的错误
+2. 完善文档
+
+### Bug Fixes
+
+- general:
+  - 国际化工具增强 (#46) ([60c53dd](https://github.com/unknowIfGuestInDream/tlcsdm-common/commit/60c53dd698beb9f935498318665ddcff20362ae7)) ([#46](https://github.com/unknowIfGuestInDream/tlcsdm-common/pull/46))
+
 ## [v1.3.1](https://github.com/unknowIfGuestInDream/tlcsdm-common/releases/tag/v1.3.1) - 2022-10-20 13:01:52
 
 1. tlcsdm-common修复一些问题
