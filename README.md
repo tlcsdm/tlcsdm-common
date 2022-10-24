@@ -6,7 +6,7 @@
 <dependency>
     <groupId>com.tlcsdm</groupId>
     <artifactId>tlcsdm-common</artifactId>
-    <version>1.3.2</version>
+    <version>1.3.3</version>
 </dependency>
 ```
 

@@ -22,7 +22,7 @@ public abstract class AbstractI18nUtil {
      */
     private String baseName = module + (module.length() > 0 ? "." : module) + "i18n.messages";
 
-    private List<Locale> supportLocale = Lists.newArrayList(Locale.ENGLISH, Locale.SIMPLIFIED_CHINESE, Locale.JAPANESE);
+    private final List<Locale> supportLocale = Lists.newArrayList(Locale.ENGLISH, Locale.SIMPLIFIED_CHINESE, Locale.JAPANESE);
 
     /**
      * get the default locale. This is the systems default if contained in the supported locales, english otherwise.
