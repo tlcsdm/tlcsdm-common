@@ -9,7 +9,6 @@
 
 - general:
   - 完善工作流 ([5171510](https://github.com/unknowIfGuestInDream/tlcsdm-common/commit/5171510aca54adaeec31af2b065a4a03ea2cdc57)) ([#49](https://github.com/unknowIfGuestInDream/tlcsdm-common/pull/49))
-  - 1.3.3 (#48) ([6164aeb](https://github.com/unknowIfGuestInDream/tlcsdm-common/commit/6164aeb27d061294c83c04c0ffb1b9f20f1e77d0)) ([#48](https://github.com/unknowIfGuestInDream/tlcsdm-common/pull/48))
   - 新增label工作流 (#47) ([e7d075f](https://github.com/unknowIfGuestInDream/tlcsdm-common/commit/e7d075f0f7a3a85c26430636be72be9894228894)) ([#47](https://github.com/unknowIfGuestInDream/tlcsdm-common/pull/47))
 
 ## [v1.3.2](https://github.com/unknowIfGuestInDream/tlcsdm-common/releases/tag/v1.3.2) - 2022-10-21 14:01:23
@@ -45,16 +44,3 @@
 
 - general:
   - 修复国际化调用错误 (#45) ([9c58e0f](https://github.com/unknowIfGuestInDream/tlcsdm-common/commit/9c58e0f998299786451c030a8a1d3a2c69ee9817)) ([#45](https://github.com/unknowIfGuestInDream/tlcsdm-common/pull/45))
-
-- deps:
-  - update dependency org.springframework.data:spring-data-commons to v2.7.3 ([6a7dfee](https://github.com/unknowIfGuestInDream/tlcsdm-common/commit/6a7dfee4d012085164aa6f830d5c31a40bb10c0f)) ([#23](https://github.com/unknowIfGuestInDream/tlcsdm-common/pull/23))
-  - update dependency org.springframework.boot:spring-boot-starter-aop to v2.7.4 ([49a5ad4](https://github.com/unknowIfGuestInDream/tlcsdm-common/commit/49a5ad4305c327a10dbd125a38410a6110b31ee4)) ([#22](https://github.com/unknowIfGuestInDream/tlcsdm-common/pull/22))
-  - update dependency org.apache.poi:poi-ooxml-schemas to v4 ([8798034](https://github.com/unknowIfGuestInDream/tlcsdm-common/commit/8798034f1b6355ff2f7d8a8ff0b5be76a6b2b358)) ([#31](https://github.com/unknowIfGuestInDream/tlcsdm-common/pull/31))
-  - update dependency org.apache.poi:poi-examples to v5 ([ba2bde2](https://github.com/unknowIfGuestInDream/tlcsdm-common/commit/ba2bde211b395eb7158a629cb4c4866bea0010c8)) ([#29](https://github.com/unknowIfGuestInDream/tlcsdm-common/pull/29))
-  - update dependency org.projectlombok:lombok to v1.18.24 ([fe06a6b](https://github.com/unknowIfGuestInDream/tlcsdm-common/commit/fe06a6bd43dc5f3566650828c42255d548911bbc)) ([#13](https://github.com/unknowIfGuestInDream/tlcsdm-common/pull/13))
-  - update dependency com.alibaba:druid-spring-boot-starter to v1.2.13-snsapshot ([ed4fce7](https://github.com/unknowIfGuestInDream/tlcsdm-common/commit/ed4fce756c11b91dc37fcf7be1cbcb971488b0c2)) ([#11](https://github.com/unknowIfGuestInDream/tlcsdm-common/pull/11))
-
-### Documentation
-
-- README:
-  - update contributors ([a67fcd1](https://github.com/unknowIfGuestInDream/tlcsdm-common/commit/a67fcd1d41da80a31f84fd4018dd0f647a0f1dfb))
