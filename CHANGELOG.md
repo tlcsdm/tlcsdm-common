@@ -36,8 +36,6 @@
   - improve i18n ([56394a1](https://github.com/unknowIfGuestInDream/tlcsdm-common/commit/56394a192d0c205a89dac09ceda606decc2febce))
   - improve i18n (#40) ([296cdfa](https://github.com/unknowIfGuestInDream/tlcsdm-common/commit/296cdfad3409735516e67a4008943b9805e9d8c4)) ([#40](https://github.com/unknowIfGuestInDream/tlcsdm-common/pull/40))
   - 1.3开始 ([22974b8](https://github.com/unknowIfGuestInDream/tlcsdm-common/commit/22974b8bb4ccbf873d461f4d5dd56b40fab782b8)) ([#36](https://github.com/unknowIfGuestInDream/tlcsdm-common/pull/36))
-  - add workflow ([b501b22](https://github.com/unknowIfGuestInDream/tlcsdm-common/commit/b501b2205d8e8e8882c1d83b6d25d30aa4bd30c8)) ([#35](https://github.com/unknowIfGuestInDream/tlcsdm-common/pull/35))
-  - add workflow ([6f4f881](https://github.com/unknowIfGuestInDream/tlcsdm-common/commit/6f4f881cd258d925af67574fc74238147ce6497f))
   - 新增日志处理 ([508ebb5](https://github.com/unknowIfGuestInDream/tlcsdm-common/commit/508ebb51ffc9ca7f6ceeabd189956d157f87345c))
 
 ### Bug Fixes
