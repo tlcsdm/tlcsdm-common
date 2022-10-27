@@ -7,7 +7,7 @@
     <artifactId>tlcsdm-common</artifactId>
     <name>tlcsdm-common</name>
     <version>1.3.4</version>
-    <description>常用工具类</description>
+    <description>tlcsdm工具类</description>
     <url>https://www.tlcsdm.com</url>
     <licenses>
         <license>
@@ -66,8 +66,6 @@
                             <encoding>UTF-8</encoding>
                             <docencoding>UTF-8</docencoding>
                             <additionalparam>-Xdoclint:none</additionalparam>
-                            <!--                            <javadocExecutable>/Library/Java/JavaVirtualMachines/jdk1.8.0_151.jdk/Contents/Home/bin/javadoc</javadocExecutable>-->
-                            <!-- TODO 临时解决不规范的javadoc生成报错,后面要规范化后把这行去掉 -->
                         </configuration>
                         <executions>
                             <execution>
