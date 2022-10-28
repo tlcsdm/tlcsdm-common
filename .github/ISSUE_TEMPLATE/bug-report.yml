@@ -23,7 +23,6 @@ body:
     attributes:
       label: Package version
       description: which version of the package are you using
-      value: 1.3.3
       placeholder: package version
     validations:
       required: true
