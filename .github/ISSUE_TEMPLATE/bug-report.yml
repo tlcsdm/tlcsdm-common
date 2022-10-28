@@ -15,25 +15,28 @@ body:
         - label: I am using **LTS** version of Java.
           required: true
 
-        - label: I am using the JDK8.
-          required: false
-
-        - label: I am using the JDK11.
-          required: false
-
-        - label: I am using the JDK17.
-          required: false
-
         - label: I am following the docs and I am sure I am using the correct configuration.
           required: true
 
   - type: input
     id: package
     attributes:
-      label: Package name
-      description: Which package are you reporting
-      value: tlcsdm-common
-      placeholder: package name
+      label: Package version
+      description: which version of the package are you using
+      value: 1.3.3
+      placeholder: package version
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: java-version
+    attributes:
+      label: which version of java are you using?
+      description: You may select more than one.
+      options:
+        - label: 8
+        - label: 11
+        - label: 17
     validations:
       required: true
 
