@@ -30,6 +30,8 @@ body:
 
   - type: checkboxes
     id: java-version
+    validations:
+      required: true
     attributes:
       label: which version of java are you using?
       description: You may select more than one.
@@ -37,7 +39,6 @@ body:
         - label: "8"
         - label: "11"
         - label: "17"
-          required: true
 
   - type: checkboxes
     id: operating-systems
