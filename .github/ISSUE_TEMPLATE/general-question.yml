@@ -5,3 +5,12 @@ labels:
   - question
 assignees: unknowIfGuestInDream
 body:
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Checklist
+      description: |-
+        Make sure that you follow these statements.
+      options:
+        - label: I am following the docs and I am sure I have tried searching for the problem.
+          required: true
