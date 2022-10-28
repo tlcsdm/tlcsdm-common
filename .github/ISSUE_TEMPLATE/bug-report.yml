@@ -37,9 +37,7 @@ body:
         - label: "8"
         - label: "11"
         - label: "17"
-
-    validations:
-      required: true
+          required: true
 
   - type: checkboxes
     id: operating-systems
