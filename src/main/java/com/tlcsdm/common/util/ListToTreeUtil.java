@@ -42,6 +42,7 @@ public class ListToTreeUtil {
      * @param pidFun    上级id函数
      * @param deepClone 是否进行深克隆，默认为否
      */
+    @SuppressWarnings("unchecked")
     public static List<Map<String, Object>> listToTree(List<Map<String, Object>> list, Predicate<Map<String, Object>> isRoot, Function<Map<String, Object>, ?> idFun, Function<Map<String, Object>, ?> pidFun, String leafKey, boolean deepClone) {
         if (Objects.isNull(list) || Objects.isNull(isRoot) || Objects.isNull(idFun) || Objects.isNull(pidFun)) {
             return new ArrayList<>();
