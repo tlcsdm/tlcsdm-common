@@ -38,12 +38,6 @@ public class TraceThreadPoolTaskExecutor extends ThreadPoolTaskExecutor {
     }
 
     @Override
-    public void execute(Runnable task, long startTimeout) {
-        showThreadPoolInfo("2. do execute");
-        super.execute(task, startTimeout);
-    }
-
-    @Override
     public Future<?> submit(Runnable task) {
         showThreadPoolInfo("1. do submit");
         return super.submit(ThreadMdcUtil.wrap(task, MDC.getCopyOfContextMap()));

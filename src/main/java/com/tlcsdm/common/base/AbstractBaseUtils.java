@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.net.InetAddress;
 import java.net.URLEncoder;
 import java.net.UnknownHostException;
@@ -82,7 +83,7 @@ public class AbstractBaseUtils {
             return CN_ZEOR_FULL;
         }
         // 这里会进行金额的四舍五入
-        long number = numberOfMoney.movePointRight(MONEY_PRECISION).setScale(0, 4).abs().longValue();
+        long number = numberOfMoney.movePointRight(MONEY_PRECISION).setScale(0, RoundingMode.HALF_UP).abs().longValue();
         // 得到小数点后两位值
         long scale = number % 100;
         int numUnit = 0;
@@ -391,19 +392,19 @@ public class AbstractBaseUtils {
      */
     public static String getIp(HttpServletRequest request) {
         String ip = request.getHeader("X-FORWARDED-FOR");
-        if (StringUtils.isEmpty(ip) || "unknown".equalsIgnoreCase(ip)) {
+        if (!StringUtils.hasLength(ip) || "unknown".equalsIgnoreCase(ip)) {
             ip = request.getHeader("Proxy-Client-IP");
         }
-        if (StringUtils.isEmpty(ip) || "unknown".equalsIgnoreCase(ip)) {
+        if (!StringUtils.hasLength(ip) || "unknown".equalsIgnoreCase(ip)) {
             ip = request.getHeader("WL-Proxy-Client-IP");
         }
-        if (StringUtils.isEmpty(ip) || "unknown".equalsIgnoreCase(ip)) {
+        if (!StringUtils.hasLength(ip) || "unknown".equalsIgnoreCase(ip)) {
             ip = request.getHeader("HTTP_CLIENT_IP");
         }
-        if (StringUtils.isEmpty(ip) || "unknown".equalsIgnoreCase(ip)) {
+        if (!StringUtils.hasLength(ip) || "unknown".equalsIgnoreCase(ip)) {
             ip = request.getHeader("HTTP_X_FORWARDED_FOR");
         }
-        if (StringUtils.isEmpty(ip) || "unknown".equalsIgnoreCase(ip)) {
+        if (!StringUtils.hasLength(ip) || "unknown".equalsIgnoreCase(ip)) {
             ip = request.getRemoteAddr();
         }
         if ("0:0:0:0:0:0:0:1".equals(ip)) {

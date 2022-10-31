@@ -22,6 +22,7 @@ public class DelayedItem<T> implements Delayed {
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public int compareTo(Delayed o) {
         if (o == null) return 1;
         if (o == this) return 0;
