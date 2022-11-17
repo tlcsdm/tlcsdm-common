@@ -52,6 +52,27 @@ public abstract class AbstractI18nUtil {
         return locale;
     }
 
+    public void setLocale(Locale locale) {
+        if (supportLocale.contains(locale)) {
+            this.locale = locale;
+        }
+    }
+
+    public void setLocale(String l) {
+        switch (l.toLowerCase()) {
+            case "en":
+                locale = Locale.ENGLISH;
+                break;
+            case "zh":
+                locale = Locale.SIMPLIFIED_CHINESE;
+                break;
+            case "ja":
+                locale = Locale.JAPANESE;
+                break;
+            default:
+        }
+    }
+
     /**
      * gets the string with the given key from the resource bundle for the current locale and uses it as first argument
      * to MessageFormat.format, passing in the optional args and returning the result.
