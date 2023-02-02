@@ -9,7 +9,7 @@ java1.8可以使用 1.3.4
 <dependency>
     <groupId>com.tlcsdm</groupId>
     <artifactId>tlcsdm-common</artifactId>
-    <version>1.4.1</version>
+    <version>{version}</version>
 </dependency>
 ```
 
