@@ -1,9 +1,6 @@
 package com.tlcsdm.common.util;
 
-import com.google.common.collect.Lists;
-
 import java.text.MessageFormat;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
