@@ -3,6 +3,7 @@ package com.tlcsdm.common.util;
 import com.google.common.collect.Lists;
 
 import java.text.MessageFormat;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
@@ -22,7 +23,7 @@ public abstract class AbstractI18nUtil {
      */
     private String baseName = module + (module.length() > 0 ? "." : module) + "i18n.messages";
 
-    private final List<Locale> supportLocale = Lists.newArrayList(Locale.ENGLISH, Locale.SIMPLIFIED_CHINESE, Locale.JAPANESE);
+    private final List<Locale> supportLocale = List.of(Locale.ENGLISH, Locale.SIMPLIFIED_CHINESE, Locale.JAPANESE);
 
     /**
      * get the default locale. This is the systems default if contained in the supported locales, english otherwise.
