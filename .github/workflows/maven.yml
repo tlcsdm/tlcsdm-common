@@ -4,6 +4,7 @@
 name: Java CI with Maven
 
 on:
+  merge_group:
   pull_request:
     branches: [ "master" ]
 
