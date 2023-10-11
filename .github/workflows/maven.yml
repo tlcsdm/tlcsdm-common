@@ -4,30 +4,19 @@
 name: Java CI with Maven
 
 on:
-  push:
-    branches: [ "master" ]
   pull_request:
     branches: [ "master" ]
-  pull_request_target:
-    types:
-      - labeled
-      - unlabeled
-      - synchronize
-      - opened
-      - edited
-      - ready_for_review
-      - reopened
-      - unlocked
 
 jobs:
   build:
-
-    runs-on: ubuntu-latest
-    
     strategy:
+      fail-fast: false
       matrix:
         java: [ '11', '17' ]
-        
+        os: [ ubuntu-latest, macos-latest, windows-latest ]
+        experimental: [ false ]
+    runs-on: ${{ matrix.os }}    
+    continue-on-error: ${{ matrix.experimental }}
     steps:
     - uses: actions/checkout@v3
     - name: Set up JDK ${{ matrix.Java }}
@@ -37,4 +26,4 @@ jobs:
         distribution: 'temurin'
         cache: maven
     - name: Build with Maven
-      run: mvn -B package --file pom.xml -Dmaven.test.skip=true
+      run: mvn -B package --file pom.xml -DskipTests
