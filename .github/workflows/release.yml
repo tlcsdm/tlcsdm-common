@@ -1,0 +1,31 @@
+name: Maven Central Repo Deployment
+# 触发脚本的事件  这里为发布release之后触发
+on:
+  workflow_dispatch:
+  release:
+    types: [ released ]
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Git Repo
+        uses: actions/checkout@v2
+      - name: Set up Maven Central Repo
+        uses: actions/setup-java@v1
+        with:
+          java-version: 11
+      - name: Set up Apache Maven Central
+        uses: actions/setup-java@v1
+        with: # running setup-java again overwrites the settings.xml
+          java-version: 11
+          server-id: sonatype-nexus-snapshots # Value of the distributionManagement/repository/id field of the pom.xml
+          server-username: MAVEN_USERNAME
+          server-password: MAVEN_CENTRAL_TOKEN
+          gpg-passphrase: MAVEN_GPG_PASSPHRASE
+          gpg-private-key: ${{ secrets.GPG_PRIVATE_KEY }}
+      - name: Publish to Apache Maven Central
+        run: mvn clean deploy -P release
+        env:
+          MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
+          MAVEN_CENTRAL_TOKEN: ${{ secrets.OSSRH_TOKEN }}
+          MAVEN_GPG_PASSPHRASE: ${{ secrets.GPG_PASSWORD }}

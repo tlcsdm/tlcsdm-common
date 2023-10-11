@@ -6,7 +6,7 @@
     <groupId>com.tlcsdm</groupId>
     <artifactId>tlcsdm-common</artifactId>
     <name>tlcsdm-common</name>
-    <version>1.4.3</version>
+    <version>1.4.4</version>
     <description>tlcsdm工具类</description>
     <url>https://www.tlcsdm.com</url>
     <licenses>
@@ -32,7 +32,7 @@
     <developers>
         <developer>
             <name>unknowIfGuestInDream</name>
-            <email>tang97155@gmail.com</email>
+            <email>liang.tang.cx@gmail.com</email>
         </developer>
     </developers>
     <profiles>
@@ -65,7 +65,6 @@
                             <charset>UTF-8</charset>
                             <encoding>UTF-8</encoding>
                             <docencoding>UTF-8</docencoding>
-                            <additionalparam>-Xdoclint:none</additionalparam>
                         </configuration>
                         <executions>
                             <execution>
