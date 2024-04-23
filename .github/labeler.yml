@@ -1,18 +1,19 @@
 enhancement:
-  - src/**
+  - changed-files:
+      - any-glob-to-any-file: src/**
 
 workflow:
-  - .github/**
-
-documentation:
-  - CHANGELOG.md
-  - README.md
-  - CONTRIBUTORS.md
+  - changed-files:
+      - any-glob-to-any-file: .github/**
 
 dependencies:
-  - pom.xml
+  - changed-files:
+      - any-glob-to-any-file: pom.xml
 
-automerge:
-  - all: [ 'README.md' ]
-  - all: [ 'CHANGELOG.md' ]
-  - all: [ 'CONTRIBUTORS.md' ]
+documentation:
+  - changed-files:
+      - any-glob-to-any-file: [ ' CHANGELOG.md' ,'README.md' ,'CONTRIBUTORS.md' ,'LICENSE' ,'SECURITY.md' ]
+
+ci:
+  - changed-files:
+      - any-glob-to-any-file: [ '.mvn/**' ,'.imgbotconfig' ,'.mergify.yml' ,'qodana.yaml' ]
