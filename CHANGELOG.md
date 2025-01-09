@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## [v1.4.6](https://github.com/tlcsdm/tlcsdm-common/releases/tag/v1.4.6) - 2025-01-09 14:07:04
+
+升级依赖
+
 ## [v1.4.5](https://github.com/tlcsdm/tlcsdm-common/releases/tag/v1.4.5) - 2023-10-20 15:41:20
 
 Upgrade dependency
