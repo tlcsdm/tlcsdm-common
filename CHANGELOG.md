@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## [v1.4.6](https://github.com/tlcsdm/tlcsdm-common/releases/tag/v1.4.6) - 2025-01-09 14:07:04
+
+升级依赖
+
 ## [v1.4.5](https://github.com/tlcsdm/tlcsdm-common/releases/tag/v1.4.5) - 2023-10-20 15:41:20
 
 Upgrade dependency
@@ -126,7 +130,6 @@ Upgrade dependency
 
 - general:
   - 修复国际化调用错误 (#45) ([9c58e0f](https://github.com/tlcsdm/tlcsdm-common/commit/9c58e0f998299786451c030a8a1d3a2c69ee9817)) ([#45](https://github.com/tlcsdm/tlcsdm-common/pull/45))
-
 - deps:
   - update dependency org.springframework.data:spring-data-commons to v2.7.3 ([6a7dfee](https://github.com/tlcsdm/tlcsdm-common/commit/6a7dfee4d012085164aa6f830d5c31a40bb10c0f)) ([#23](https://github.com/tlcsdm/tlcsdm-common/pull/23))
   - update dependency org.springframework.boot:spring-boot-starter-aop to v2.7.4 ([49a5ad4](https://github.com/tlcsdm/tlcsdm-common/commit/49a5ad4305c327a10dbd125a38410a6110b31ee4)) ([#22](https://github.com/tlcsdm/tlcsdm-common/pull/22))
