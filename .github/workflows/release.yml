@@ -19,10 +19,10 @@ jobs:
           server-username: MAVEN_USERNAME
           server-password: MAVEN_CENTRAL_TOKEN
           gpg-passphrase: MAVEN_GPG_PASSPHRASE
-          gpg-private-key: ${{ secrets.GPG_PRIVATE_KEY }}
+          gpg-private-key: ${{ secrets.TLCSDM_GPG_PRIVATE_KEY }}
       - name: Publish to Apache Maven Central
         run: mvn clean deploy --batch-mode -Prelease
         env:
-          MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
-          MAVEN_CENTRAL_TOKEN: ${{ secrets.OSSRH_TOKEN }}
-          MAVEN_GPG_PASSPHRASE: ${{ secrets.GPG_PASSWORD }}
+          MAVEN_USERNAME: ${{ secrets.TLCSDM_OSSRH_USERNAME }}
+          MAVEN_CENTRAL_TOKEN: ${{ secrets.TLCSDM_OSSRH_TOKEN }}
+          MAVEN_GPG_PASSPHRASE: ${{ secrets.TLCSDM_GPG_PASSWORD }}
