@@ -18,7 +18,7 @@ jobs:
           cache: 'maven'
 
       - name: Release Maven package
-        uses: WasiqB/maven-publish-action@v2.9.0
+        uses: WasiqB/maven-publish-action@v1
         with:
           gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY }}
           gpg_passphrase: ${{ secrets.GPG_PASSWORD }}
