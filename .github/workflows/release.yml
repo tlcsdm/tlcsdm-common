@@ -15,6 +15,7 @@ jobs:
         with: # running setup-java again overwrites the settings.xml
           java-version: 11
           distribution: 'temurin'
+          cache: 'maven'
 
       - name: Release Maven package
         uses: WasiqB/maven-publish-action@v2.9.0
